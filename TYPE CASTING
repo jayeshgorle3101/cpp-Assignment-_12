@@ -1,0 +1,76 @@
+
+#include <iostream>
+using namespace std;
+
+
+class Base {
+public:
+    virtual void display() {
+        cout << "Base class" << endl;
+    }
+
+    virtual ~Base() = default;
+};
+
+class Derived : public Base {
+public:
+    void show() {
+        cout << "Derived class" << endl;
+    }
+};
+
+int main() {
+    
+    cout << "IMPLICIT TYPE CASTING" << endl;
+
+    int a = 20;
+    double b = a;
+
+    cout << "Integer value: " << a << endl;
+    cout << "Double value: " << b << endl;
+
+    
+    cout << "\nSTATIC_CAST" << endl;
+
+    double x = 25.75;
+    int y = static_cast<int>(x);
+
+    cout << "Double value: " << x << endl;
+    cout << "Integer value: " << y << endl;
+
+    
+    cout << "\nDYNAMIC_CAST" << endl;
+
+    Derived d;
+    Base* ptr = &d;
+
+    Derived* dptr = dynamic_cast<Derived*>(ptr);
+
+    if (dptr != nullptr) {
+        dptr->show();
+    }
+
+    
+    cout << "\nCONST_CAST" << endl;
+
+    int value = 40;
+    const int* cptr = &value;
+
+    int* ptr2 = const_cast<int*>(cptr);
+    *ptr2 = 80;
+
+    cout << "Modified value: " << value << endl;
+
+    
+    cout << "\nREINTERPRET_CAST" << endl;
+
+    int num = 35;
+    int* numPtr = &num;
+
+    char* charPtr = reinterpret_cast<char*>(numPtr);
+
+    cout << "Integer value: " << num << endl;
+    cout << "Pointer conversion completed." << endl;
+
+    return 0;
+}
